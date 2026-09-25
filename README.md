@@ -1,60 +1,61 @@
-# OpenWork Mod
+# EZ Blocks
 
-A Structure Block utility for Minecraft 26.3 (Fabric).
+Makes structure blocks easier to use by replacing their GUI with a better one.
 
-Vanilla's Structure Block screen is slow to use for anything but a single hand-picked
-structure. OpenWork replaces it with a browser over every structure registered in your
-world, plus one-click actions for the operations builders actually repeat.
+## The problem
 
-## Features
+The vanilla structure block screen is annoying. It is one dropdown of every
+structure in your world, and once you pick one that is it. No search, and you
+have to remember the exact name of what you saved three worlds ago.
 
-- **Instant mode toggle** — right click a Structure Block with an empty hand to flip it
-  between `SAVE` and `LOAD`. No screen, no menu.
-- **Structure browser** — sneak and right click to open a searchable, paged grid of every
-  structure in the world registry, including your datapack additions.
-- **Size management** — set the bounding box directly with per-axis `+`/`-` steppers, or
-  `Auto-Size` to fit the selection.
-- **Save and place** — `Save` marks the current region, `Save & Place` marks it and
-  immediately generates the structure.
+## What it does
 
-## Controls
+Right click a structure block to open the EZ Blocks browser. From there you can
+search everything you have saved, set the size, and save it back out. You never
+have to remember a name.
 
-| Input | Result |
+| Control | What it does |
 | --- | --- |
-| Right click (empty hand) | Toggle `SAVE` / `LOAD` |
-| Sneak + right click | Open the structure browser |
-| `Save` | Save the current region |
-| `Save & Place` | Save the region and generate it |
-| `Auto-Size` | Fit the bounding box to the selection |
+| Search box | Type part of a structure name to filter the list |
+| Structure list | Click a structure to select it. Click again to clear |
+| Size boxes | Change the X, Y and Z size of the block |
+| `Auto-Size` | Fills the size boxes with whatever the selected structure is |
+| `Save` | Writes the structure back to the block |
+| `Save & Place` | Writes it and drops a structure block into your inventory |
+
+### Block mode
+
+If the block is already loaded with a structure, `Save & Place` and the browser
+shortcut both act on that structure directly.
+
+## Other controls
+
+| Input | What it does |
+| --- | --- |
+| Right click a structure block | Open the browser |
+| Right click a loaded structure block | Save the structure |
+| `Esc` | Close the browser, or go back to the vanilla screen from block mode |
 
 ## Requirements
 
-- Minecraft 26.3
-- Fabric Loader 0.19.5 or newer
+- Minecraft `26.3`
+- Fabric Loader `0.19.5` or newer
 - Fabric API
-- Java 25 or newer
+- Java 25
 
-## Installation
+Works on both the client and a dedicated server. Everyone in a multiplayer game
+needs it installed.
 
-1. Install the Fabric Loader for Minecraft 26.3.
-2. Download the matching Fabric API version.
-3. Drop `openworkmod-1.0.0.jar` and the Fabric API jar into your `mods` folder.
+## Build it yourself
 
-## Building from source
-
-```sh
-./gradlew.bat build
+```
+./gradlew build
 ```
 
-The release jar is written to `build/libs/`.
+The finished jar is in `build/libs/`.
 
-## Notes
-
-- All block edits are performed server side. Clients only send requests.
-- Saving a structure block does not save entities within the region.
-- This mod replaces the vanilla Structure Block interaction, so the vanilla screen is no
-  longer reachable.
+To play it in a dev environment, run `./gradlew runClient`.
 
 ## License
 
-MIT
+MIT. See `LICENSE`.

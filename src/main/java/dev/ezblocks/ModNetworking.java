@@ -1,6 +1,6 @@
-package dev.openwork.mod;
+package dev.ezblocks;
 
-import dev.openwork.mod.network.ModPayloads;
+import dev.ezblocks.network.ModPayloads;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 
 /**
- * Payload registration and the server side handlers behind every OpenWork operation.
+ * Payload registration and the server side handlers behind every EZ Blocks operation.
  */
 public final class ModNetworking {
 	private ModNetworking() {

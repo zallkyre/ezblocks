@@ -1,6 +1,6 @@
-package dev.openwork.mod.client.screen;
+package dev.ezblocks.client.screen;
 
-import dev.openwork.mod.network.ModPayloads;
+import dev.ezblocks.network.ModPayloads;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The OpenWork Structure Block browser.
+ * The EZ Blocks Structure Block browser.
  *
  * <p>Opened by sneak right clicking a Structure Block. Searching filters the full world
  * registry of structures, the grid pages through the matches, and the action row drives the
@@ -67,7 +67,7 @@ public class StructureBrowserScreen extends Screen {
 
 	public StructureBrowserScreen(BlockPos pos, List<Identifier> structures, String mode, String currentStructure,
 			int sizeX, int sizeY, int sizeZ) {
-		super(Component.literal("OpenWork - Structure Block"));
+		super(Component.literal("EZ Blocks - Structure Block"));
 		this.pos = pos;
 		this.allStructures = structures;
 		this.mode = mode;

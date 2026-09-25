@@ -1,4 +1,4 @@
-package dev.openwork.mod;
+package dev.ezblocks;
 
 import net.fabricmc.api.ModInitializer;
 
@@ -7,8 +7,8 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class OpenWorkMod implements ModInitializer {
-	public static final String MOD_ID = "openworkmod";
+public class EzBlocks implements ModInitializer {
+	public static final String MOD_ID = "EzBlocks";
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -24,7 +24,7 @@ public class OpenWorkMod implements ModInitializer {
 		ModNetworking.registerPayloads();
 		ModNetworking.registerServer();
 
-		LOGGER.info("OpenWork Mod loaded on Minecraft 26.3");
+		LOGGER.info("EZ Blocks Mod loaded on Minecraft 26.3");
 	}
 
 	public static Identifier id(String path) {

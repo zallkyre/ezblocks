@@ -1,6 +1,6 @@
-package dev.openwork.mod.network;
+package dev.ezblocks.network;
 
-import dev.openwork.mod.OpenWorkMod;
+import dev.ezblocks.EzBlocks;
 
 import io.netty.buffer.ByteBuf;
 
@@ -13,7 +13,7 @@ import net.minecraft.resources.Identifier;
 import java.util.List;
 
 /**
- * All network payloads exchanged between the OpenWork client screen and the server.
+ * All network payloads exchanged between the EZ Blocks client screen and the server.
  *
  * <p>Every structure mutation is server authoritative: the client only ever sends an
  * intent, and the server validates the target block before acting.
@@ -26,7 +26,7 @@ public final class ModPayloads {
 	public record OpenBrowser(BlockPos pos, List<Identifier> structures, String mode, String structure,
 			int sizeX, int sizeY, int sizeZ) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<OpenBrowser> ID =
-				new CustomPacketPayload.Type<>(OpenWorkMod.id("open_browser"));
+				new CustomPacketPayload.Type<>(EzBlocks.id("open_browser"));
 
 		public static final StreamCodec<ByteBuf, OpenBrowser> CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, OpenBrowser::pos,
@@ -48,7 +48,7 @@ public final class ModPayloads {
 	public record SyncState(String mode, String structure, int sizeX, int sizeY, int sizeZ)
 			implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<SyncState> ID =
-				new CustomPacketPayload.Type<>(OpenWorkMod.id("sync_state"));
+				new CustomPacketPayload.Type<>(EzBlocks.id("sync_state"));
 
 		public static final StreamCodec<ByteBuf, SyncState> CODEC = StreamCodec.composite(
 				ByteBufCodecs.stringUtf8(32), SyncState::mode,
@@ -67,7 +67,7 @@ public final class ModPayloads {
 	/** C2S: assign a structure to the block at {@code pos}. */
 	public record SelectStructure(BlockPos pos, Identifier structure) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<SelectStructure> ID =
-				new CustomPacketPayload.Type<>(OpenWorkMod.id("select_structure"));
+				new CustomPacketPayload.Type<>(EzBlocks.id("select_structure"));
 
 		public static final StreamCodec<ByteBuf, SelectStructure> CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, SelectStructure::pos,
@@ -83,7 +83,7 @@ public final class ModPayloads {
 	/** C2S: run a named action against the block at {@code pos}. */
 	public record RunAction(BlockPos pos, String action) implements CustomPacketPayload {
 		public static final CustomPacketPayload.Type<RunAction> ID =
-				new CustomPacketPayload.Type<>(OpenWorkMod.id("run_action"));
+				new CustomPacketPayload.Type<>(EzBlocks.id("run_action"));
 
 		public static final StreamCodec<ByteBuf, RunAction> CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, RunAction::pos,

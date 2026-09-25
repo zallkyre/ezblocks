@@ -1,15 +1,15 @@
-package dev.openwork.mod.client;
+package dev.ezblocks.client;
 
-import dev.openwork.mod.OpenWorkMod;
-import dev.openwork.mod.client.screen.StructureBrowserScreen;
-import dev.openwork.mod.network.ModPayloads;
+import dev.ezblocks.EzBlocks;
+import dev.ezblocks.client.screen.StructureBrowserScreen;
+import dev.ezblocks.network.ModPayloads;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 import net.minecraft.client.Minecraft;
 
-public class OpenWorkModClient implements ClientModInitializer {
+public class EzBlocksClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// Payload codecs are already registered by the common entrypoint, which also
@@ -35,6 +35,6 @@ public class OpenWorkModClient implements ClientModInitializer {
 					}
 				}));
 
-		OpenWorkMod.LOGGER.info("OpenWork Mod client ready");
+		EzBlocks.LOGGER.info("EZ Blocks Mod client ready");
 	}
 }

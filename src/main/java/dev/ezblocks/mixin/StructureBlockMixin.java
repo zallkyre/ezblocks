@@ -1,7 +1,7 @@
-package dev.openwork.mod.mixin;
+package dev.ezblocks.mixin;
 
-import dev.openwork.mod.ModNetworking;
-import dev.openwork.mod.StructureActions;
+import dev.ezblocks.ModNetworking;
+import dev.ezblocks.StructureActions;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -22,14 +22,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Replaces the vanilla Structure Block screen.
  *
  * <p>Right click with an empty hand toggles save/load instantly.
- * Sneak and right click opens the OpenWork browser instead of the vanilla screen.
+ * Sneak and right click opens the EZ Blocks browser instead of the vanilla screen.
  *
  * <p>The return value is consumed on both sides so vanilla never opens its own screen.
  */
 @Mixin(StructureBlock.class)
 public class StructureBlockMixin {
 	@Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
-	private void openwork$overrideInteraction(BlockState state, Level level, BlockPos pos, Player player,
+	private void ezblocks$overrideInteraction(BlockState state, Level level, BlockPos pos, Player player,
 			BlockHitResult hitResult, CallbackInfoReturnable<InteractionResult> cir) {
 		if (level instanceof ServerLevel && player instanceof ServerPlayer serverPlayer) {
 			if (player.isShiftKeyDown()) {

@@ -1,11 +1,8 @@
 {
 	"required": true,
-	"package": "dev.openwork.mod.mixin",
+	"package": "dev.ezblocks.client.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"mixins": [
-		"OpenWorkMixin",
-		"StructureBlockMixin"
-	],
+	"client": [],
 	"injectors": {
 		"defaultRequire": 1
 	},

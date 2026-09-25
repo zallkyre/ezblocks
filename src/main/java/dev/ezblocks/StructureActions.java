@@ -1,4 +1,4 @@
-package dev.openwork.mod;
+package dev.ezblocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Server side implementation of every Structure Block operation OpenWork exposes.
+ * Server side implementation of every Structure Block operation EZ Blocks exposes.
  *
  * <p>All methods are safe to call with an arbitrary position; they simply do nothing when the
  * target is not a Structure Block.
@@ -46,7 +46,7 @@ public final class StructureActions {
 	}
 
 	private static void reply(ServerPlayer player, String message) {
-		player.sendSystemMessage(Component.literal("[OpenWork] " + message));
+		player.sendSystemMessage(Component.literal("[EZ] " + message));
 	}
 
 	/** Flip a plain Structure Block between save and load without opening any screen. */

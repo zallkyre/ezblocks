@@ -1,28 +1,28 @@
 {
 	"schemaVersion": 1,
-	"id": "openworkmod",
+	"id": "ezblocks",
 	"version": "${version}",
-	"name": "OpenWork Mod",
-	"description": "Structure Block utility: right click to instantly toggle SAVE/LOAD, sneak right click to open a searchable browser of every structure in your world, then resize, save, or save and place in one click.",
+	"name": "EZ Blocks",
+	"description": "A better GUI for structure blocks. Search every structure in your world, set the size, and save or place it without leaving the screen.",
 	"authors": [
 		"zallkyre"
 	],
 	"contact": {},
 	"license": "MIT",
-	"icon": "assets/openworkmod/icon.png",
+	"icon": "assets/ezblocks/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"dev.openwork.mod.OpenWorkMod"
+			"dev.ezblocks.EzBlocks"
 		],
 		"client": [
-			"dev.openwork.mod.client.OpenWorkModClient"
+			"dev.ezblocks.client.EzBlocksClient"
 		]
 	},
 	"mixins": [
-		"openworkmod.mixins.json",
+		"ezblocks.mixins.json",
 		{
-			"config": "openworkmod.client.mixins.json",
+			"config": "ezblocks.client.mixins.json",
 			"environment": "client"
 		}
 	],
