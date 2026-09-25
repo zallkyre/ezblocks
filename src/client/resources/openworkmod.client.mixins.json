@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "dev.openwork.mod.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"OpenWorkClientMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

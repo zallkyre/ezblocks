@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "openworkmod",
+	"version": "${version}",
+	"name": "OpenWork Mod",
+	"description": "Structure Block utility: right click to instantly toggle SAVE/LOAD, sneak right click to open a searchable browser of every structure in your world, then resize, save, or save and place in one click.",
+	"authors": [
+		"zallkyre"
+	],
+	"contact": {},
+	"license": "MIT",
+	"icon": "assets/openworkmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.openwork.mod.OpenWorkMod"
+		],
+		"client": [
+			"dev.openwork.mod.client.OpenWorkModClient"
+		]
+	},
+	"mixins": [
+		"openworkmod.mixins.json",
+		{
+			"config": "openworkmod.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
