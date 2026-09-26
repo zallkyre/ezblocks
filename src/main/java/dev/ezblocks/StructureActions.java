@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.block.state.properties.StructureMode;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Comparator;
 import java.util.List;
@@ -29,6 +30,9 @@ public final class StructureActions {
 	public static final int AXIS_Y = 1;
 	public static final int AXIS_Z = 2;
 
+	/** Reach in blocks, matching the vanilla Structure Block. */
+	private static final double MAX_REACH = 4.5;
+
 	private StructureActions() {
 	}
 
@@ -41,18 +45,49 @@ public final class StructureActions {
 				.toList();
 	}
 
-	private static StructureBlockEntity blockEntityAt(ServerLevel level, BlockPos pos) {
-		return level.getBlockEntity(pos) instanceof StructureBlockEntity be ? be : null;
-	}
-
 	private static void reply(ServerPlayer player, String message) {
 		player.sendSystemMessage(Component.literal("[EZ] " + message));
 	}
 
+	/**
+	 * Validate that a player may operate on the Structure Block at {@code pos} and return it.
+	 *
+	 * <p>Returns null after telling the player why the action was refused. Every entry point
+	 * goes through here, so a modified client cannot drive a block it does not own, cannot
+	 * reach, or is not allowed to save. Distance and build checks apply to all actions;
+	 * {@code needsCreative} mirrors vanilla, which only lets creative players write a template.
+	 */
+	private static StructureBlockEntity target(ServerPlayer player, BlockPos pos, boolean needsCreative) {
+		ServerLevel level = player.level();
+
+		if (!(level.getBlockEntity(pos) instanceof StructureBlockEntity be)) {
+			return null;
+		}
+
+		if (player.distanceToSqr(Vec3.atCenterOf(pos)) > MAX_REACH * MAX_REACH) {
+			reply(player, "Too far away.");
+
+			return null;
+		}
+
+		if (!player.mayBuild()) {
+			reply(player, "You cannot edit blocks in this game mode.");
+
+			return null;
+		}
+
+		if (needsCreative && !player.isCreative()) {
+			reply(player, "Saving a structure needs creative mode.");
+
+			return null;
+		}
+
+		return be;
+	}
+
 	/** Flip a plain Structure Block between save and load without opening any screen. */
 	public static void toggleMode(ServerPlayer player, BlockPos pos) {
-		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, false);
 
 		if (be == null) {
 			return;
@@ -74,7 +109,7 @@ public final class StructureActions {
 	/** Point the block at a structure and pull its bounding box, rotation and mirror from it. */
 	public static boolean select(ServerPlayer player, BlockPos pos, Identifier structure) {
 		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, false);
 
 		if (be == null) {
 			return false;
@@ -103,8 +138,7 @@ public final class StructureActions {
 
 	/** Grow or shrink the save bounding box on one axis. */
 	public static void resize(ServerPlayer player, BlockPos pos, int axis, int delta) {
-		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, false);
 
 		if (be == null) {
 			return;
@@ -124,7 +158,7 @@ public final class StructureActions {
 	/** Scan the world for paired Structure Blocks and adopt the resulting bounding box. */
 	public static void detectSize(ServerPlayer player, BlockPos pos) {
 		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, false);
 
 		if (be == null) {
 			return;
@@ -140,8 +174,7 @@ public final class StructureActions {
 
 	/** Save the marked region as a template, keeping the block in save mode. */
 	public static boolean save(ServerPlayer player, BlockPos pos) {
-		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, true);
 
 		if (be == null) {
 			return false;
@@ -161,7 +194,7 @@ public final class StructureActions {
 	/** Save the region and immediately stamp it back into the world. */
 	public static boolean saveAndPlace(ServerPlayer player, BlockPos pos) {
 		ServerLevel level = player.level();
-		StructureBlockEntity be = blockEntityAt(level, pos);
+		StructureBlockEntity be = target(player, pos, true);
 
 		if (be == null) {
 			return false;
