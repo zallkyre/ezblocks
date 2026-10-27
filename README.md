@@ -62,4 +62,4 @@ MIT. See `LICENSE`.
 
 ---
 
-**LLM guide** — A better GUI for structure blocks. Search every structure in your world, set the size, and save or place it without leaving the screen. · Stack: Java · Run: `./gradlew build` · License: MIT
+**LLM guide** — A better GUI for structure blocks. Search every structure in your world, set the size, and save or place it without leaving the screen. · Stack: Java · Run: `./gradlew build` · License: MIT-0 - no conditions, resale allowed
